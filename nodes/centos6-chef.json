@@ -1,9 +1,20 @@
 {
   "run_list": [
+    "recipe[rvm::system]",
+    "recipe[sqlite]",
+    "recipe[git]",
+    "recipe[build-essential]",
+    "recipe[openssl]",
     "recipe[yum-epel]",
-    "recipe[nginx]" 
+    "recipe[nginx]"
   ],
   "automatic": {
     "ipaddress": "centos6-chef"
+  },
+  "rvm": {
+    "user": "root",
+    "default_ruby": "ruby-2.1",
+    "user_default_ruby": "ruby-2.1",
+    "rubies": ["ruby-2.1"]
   }
 }
