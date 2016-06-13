@@ -34,17 +34,29 @@ http {
     keepalive_timeout  65;
 
     #gzip  on;
+    upstream unicorn-unix-domain-socket {
+        server unix:/tmp/unicorn.sock;
+    }
 
     server{
-	listen 80;
-	server_name 198.168.33.10;
-	#server_name 127.0.0.1;
+        listen 80;
+        server_name 198.168.33.10;
+        #server_name 127.0.0.1;
 	
-	location / {
-		root /usr/share/nginx/html;
-		#root /var/www/html;
-		index index.html;
-	}
+        root /usr/share/nginx/html/railsapp/public;
+        
+        location / {
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_pass http://unicorn-unix-domain-socket;
+        } 
+
+        #location / {
+            #root /usr/share/nginx/html;
+            #index index.html;
+        #}
+
     }
 
     #include /etc/nginx/conf.d/*.conf;

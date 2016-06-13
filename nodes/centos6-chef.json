@@ -13,8 +13,8 @@
   },
   "rvm": {
     "user": "root",
-    "default_ruby": "ruby-2.1",
-    "user_default_ruby": "ruby-2.1",
-    "rubies": ["ruby-2.1"]
+    "default_ruby": "ruby-2.3.1",
+    "user_default_ruby": "ruby-2.3.1",
+    "rubies": ["ruby-2.3.1"]
   }
 }
